@@ -7,22 +7,18 @@ namespace Sifra
     {
         static void Main()
         {
-
             
-
-
-            /*
             string name, key;
-            Sifrovani s = new Sifrovani();
+
             
             Console.WriteLine("Input file name (include file type)...");
             name = Console.ReadLine();
             Console.Clear();
             Console.WriteLine("Input encryption key...");
             key = Console.ReadLine();
-           
+            Sifrovani s = new Sifrovani(key);
             s.StreamEncrypt("unecrypted.txt", "amogus");
-             */
+             
         }
     }
 
@@ -30,10 +26,12 @@ namespace Sifra
     {
         string klic, output;
         int[] sifra;
-        public Sifrovani()
+
+        public Sifrovani(string input)
         {
-            klic = "amogus";
+            klic = input;
         }
+
         public string Zasifrovat(string input)
         {
             sifra = new int[input.Length];
@@ -45,7 +43,7 @@ namespace Sifra
                 if(i == klic.Length - 1) index = 0;
                 else index++;
             }
-
+            
             foreach (var item in sifra)
             {
                 output += item;
@@ -56,13 +54,9 @@ namespace Sifra
         public void StreamEncrypt(string fileName, string key)
         {
             StreamReader reader = new StreamReader(fileName);
-            string input = reader.ReadToEnd();
-            
-
-
             StreamWriter writer = new StreamWriter("unecrypted.cry");
-
             
+            writer.Write(Zasifrovat(reader.ReadToEnd()));
         }
     }
 }
